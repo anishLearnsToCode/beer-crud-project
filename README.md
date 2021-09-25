@@ -7,7 +7,7 @@ The project exposes simple CRUD endpoints to add and remove beers from the inven
 
 Clone project locally
 ```
-git clone https://github.com/anishLearnsToCode/beers-project.git
+git clone https://github.com/anishLearnsToCode/beer-crud-project.git
 cd beers-project
 ```
 
