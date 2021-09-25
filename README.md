@@ -225,9 +225,6 @@ To create a new beer based on POST data (x-www-form-url-encoded)
 * description: Beer description
 * image_url: Beer Image URL
 
-![Postman example](https://developerhowto.com/wp-content/uploads/2018/12/PostMan-POST-request.png)
-
-
 ### PATCH /api/beer/{id}
 
 To update beer data by id, based on POST data (x-www-form-url-encoded)
