@@ -7,17 +7,17 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-var HTTP_PORT = 8000
+const HTTP_PORT = 8000;
 
 // Start server
 app.listen(HTTP_PORT, () => {
-    console.log("Server running on port %PORT%".replace("%PORT%",HTTP_PORT))
+    console.log(`Server running on port ${HTTP_PORT}`);
 });
 
 
 app.get("/api/beers", (req, res, next) => {
-    var sql = "select * from beer"
-    var params = []
+    const sql = "select * from beer";
+    const params = [];
     db.all(sql, params, (err, rows) => {
         if (err) {
             res.status(400).json({"error":err.message});
@@ -32,8 +32,8 @@ app.get("/api/beers", (req, res, next) => {
 
 
 app.get("/api/beer/:id", (req, res, next) => {
-    var sql = "select * from beer where id = ?"
-    var params = [req.params.id]
+    const sql = "select * from beer where id = ?";
+    const params = [req.params.id];
     db.get(sql, params, (err, row) => {
         if (err) {
             res.status(400).json({"error":err.message});
@@ -48,7 +48,7 @@ app.get("/api/beer/:id", (req, res, next) => {
 
 
 app.post("/api/beer/", (req, res, next) => {
-    var errors=[]
+    const errors = [];
     if (!req.body.id){
         errors.push("No id specified");
     }
@@ -59,14 +59,14 @@ app.post("/api/beer/", (req, res, next) => {
         res.status(400).json({"error":errors.join(",")});
         return;
     }
-    var data = {
+    const data = {
         id: req.body.id,
         name: req.body.name,
         image_url: req.body.image_url,
         description: req.body.description
-    }
-    var sql ='INSERT INTO beer (id, name, image_url, description) VALUES (?,?,?,?)'
-    var params = [data.id, data.name, data.image_url, data.description];
+    };
+    const sql = 'INSERT INTO beer (id, name, image_url, description) VALUES (?,?,?,?)';
+    const params = [data.id, data.name, data.image_url, data.description];
     db.run(sql, params, function (err, result) {
         if (err) {
             res.status(400).json({"error": err.message})
@@ -82,11 +82,11 @@ app.post("/api/beer/", (req, res, next) => {
 
 
 app.patch("/api/beer/:id", (req, res, next) => {
-    var data = {
+    const data = {
         name: req.body.name,
         image_url: req.body.image_url,
         description: req.body.description
-    }
+    };
     db.run(
         `UPDATE beer set 
            name = coalesce(?,name), 
@@ -125,4 +125,3 @@ app.delete("/api/beer/:id", (req, res, next) => {
 app.get("/", (req, res, next) => {
     res.json({"message":"Ok"})
 });
-
